@@ -18,10 +18,11 @@ def cadastro():
 
 
 def listar_pacientes():
-    lista_pacientes = json.load(open('dados_pacientes.json', 'r'))
-    print('Pacientes\n')
-    for i in range(len(lista_pacientes)):
-        print(lista_pacientes[i]['name'])
+    with open('dados_pacientes.json',) as dados_pacientes:
+        lista_pacientes = json.load(dados_pacientes)
+        print('Pacientes\n')
+        for paciente in lista_pacientes:
+            print(paciente['name'])
     print('-'*20)
 
 def menu():
@@ -34,17 +35,17 @@ def menu():
         if opcao == 1:
             try:
                 with open('dados_pacientes.json') as pacientes:
-                    antigos_pacientes = json.loads(pacientes.read())
+                    antigos_pacientes = json.load(pacientes)
                 with open('dados_pacientes.json', mode='w') as dados_pacientes:
                     antigos_pacientes.append(cadastro())
-                    x = json.dumps(antigos_pacientes)
-                    dados_pacientes.write(x)
+                    novos_pacientes = json.dumps(antigos_pacientes)
+                    dados_pacientes.write(novos_pacientes)
             except:
                 with open('dados_pacientes.json', mode='w') as dados_pacientes:
                     novos_pacientes = []
                     novos_pacientes.append(cadastro())
-                    x = json.dumps(novos_pacientes)
-                    dados_pacientes.write(x)
+                    pacientes = json.dumps(novos_pacientes)
+                    dados_pacientes.write(pacientes)
 
         elif opcao == 2:
             listar_pacientes()
