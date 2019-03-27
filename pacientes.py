@@ -9,11 +9,11 @@ def cadastro():
         dados['rg'] = input('RG: ')
         dados['cpf'] = input('CPF: ')
         dados['number'] = input('Endereço: ')
-        dados['address'] = input('número: ')
+        dados['address'] = input('Número: ')
         dados['hood'] = input('Bairro: ')
         dados['city'] = input('Cidade: ')
-        dados['estado'] = input('UF: ')
-        dados['plano'] = input('Plano de saúde: ')
+        dados['state'] = input('UF: ')
+        dados['plan'] = input('Plano de saúde: ')
         return dados
 
 

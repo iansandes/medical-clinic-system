@@ -14,3 +14,6 @@ atendimento = int(input("Escolha o tipo de atendimento a ser usado: "))
 if atendimento == 1:
     from pacientes import *
     menu()
+if atendimento == 2:
+    from medicos import *
+    menu()
