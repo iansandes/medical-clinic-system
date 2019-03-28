@@ -16,6 +16,7 @@ def cadastro():
         dados['plan'] = input('Plano de saúde: ')
         return dados
 
+
 def cadastrar_paciente():
     try:
         with open('dados_pacientes.json') as pacientes:
