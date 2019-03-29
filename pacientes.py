@@ -58,6 +58,7 @@ def menu_pacientes():
         elif opcao == 2:
             listar_pacientes()
         elif opcao == 3:
-            break
+            from menu_principal import menu_principal
+            menu_principal()
         else:
             print("Opção inválida!")
