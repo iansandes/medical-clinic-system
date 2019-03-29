@@ -2,35 +2,29 @@ import json
 
 
 def cadastro():
-        dados = {}
-        dados['name'] = input('Nome: ')
-        dados['email'] = input('Email:')
-        dados['phone'] = input('Telefone: ')
-        dados['crm'] = input('CRM: ')
-        dados['rg'] = input('RG: ')
-        dados['cpf'] = int(input('CPF: '))
-        dados['specialization'] = input('Especialização: ')
-        dados['number'] = input('Endereço: ')
-        dados['address'] = input('Número: ')
-        dados['hood'] = input('Bairro: ')
-        dados['city'] = input('Cidade: ')
-        dados['state'] = input('UF: ')
-        dados['plan'] = input('Plano de saúde: ')
-        return dados
+    dados = {'name': input('Nome: '), 'email': input('Email:'), 'phone': input('Telefone: '), 'crm': input('CRM: '),
+             'rg': input('RG: '), 'cpf': int(input('CPF: ')), 'specialization': input('Especialização: '),
+             'number': input('Endereço: '), 'address': input('Número: '), 'hood': input('Bairro: '),
+             'city': input('Cidade: '), 'state': input('UF: '), 'plan': input('Plano de saúde: ')}
+    return dados
 
 
 def listar_medicos():
-    with open('dados_medicos.json',) as dados_medicos:
-        lista_medicos = json.load(dados_medicos)
-        print('Médicos     Especialização\n')
-        for medico in lista_medicos:
-            print(medico['name'] + '     ' + medico['specialization'] )
-    print('-'*20)
+    try:
+        with open('dados_medicos.json', ) as dados_medicos:
+            lista_medicos = json.load(dados_medicos)
+            print('Médicos     Especialização\n')
+            for medico in lista_medicos:
+                print(medico['name'] + '     ' + medico['specialization'])
+        print('-' * 20)
+    except:
+        print("Nenhum médico cadastrado!")
+        menu_medicos()
 
 
 def remover_medico():
     try:
-        with open('dados_medicos.json',) as dados_medicos:
+        with open('dados_medicos.json', ) as dados_medicos:
             lista_medicos = json.load(dados_medicos)
             cpf = int(input('Qual o CPF do médico que você deseja remover?'))
             for medico in lista_medicos:
@@ -45,8 +39,7 @@ def remover_medico():
                     menu_medicos()
     except:
         print('Nenhum CPF informado')
-        remover_medico()
-            
+        menu_medicos()
 
 
 def menu_medicos():
@@ -67,8 +60,7 @@ def menu_medicos():
                     dados_medicos.write(novos_medicos)
             except:
                 with open('dados_medicos.json', mode='w') as dados_medicos:
-                    novos_medicos = []
-                    novos_medicos.append(cadastro())
+                    novos_medicos = [cadastro()]
                     medicos = json.dumps(novos_medicos)
                     dados_medicos.write(medicos)
 

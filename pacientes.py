@@ -43,7 +43,7 @@ def listar_pacientes():
         print('-'*20)
     except:
         print('Nenhum paciente encontrado!')
-        menu_pacientes
+        menu_pacientes()
 
 
 def menu_pacientes():

@@ -13,14 +13,14 @@ def menu_principal():
     atendimento = int(input("Escolha o tipo de atendimento a ser usado: "))
 
     if atendimento == 1:
-        from pacientes import menu_pacientes
-        menu_pacientes()
+        import pacientes as pt
+        pt.menu_pacientes()
     if atendimento == 2:
-        from medicos import menu_medicos
-        menu_medicos()
+        import medicos as md
+        md.menu_medicos()
     if atendimento == 3:
-        from consultas import menu_consultas
-        menu_consultas()
-        
+        import consultas as ct
+        ct.menu_consultas()
+
 
 menu_principal()
