@@ -25,28 +25,29 @@ def marcar_consulta():
     nome_medico = input('Escolha seu medico:')
     dados['médico'] = nome_medico
 
-    dados['data'] = input('Qual data [dia/mês/ano] ?') # Aqui não importar a data ou hora nesse sistema
-    dados['hora'] = input('Qual hora [hh:mm] ?')
+    dados['data'] = int(input('Qual data?')) # Aqui não importar a data ou hora nesse sistema
+    dados['hora'] = int(input('Qual hora?'))
 
     print('Consulta marcada com sucesso!')
     return dados
 
 def listar_consultas():
-    with open('dados_consultas.json',) as dados_consultas:
-        lista_consultas = json.load(dados_consultas)
-        print('Consultas: \n')
-        for consulta in lista_consultas:
-            print(consulta)
-    print('-'*20)
+    try:
+        with open('dados_consultas.json',) as dados_consultas:
+            lista_consultas = json.load(dados_consultas)
+            print('Consultas: \n')
+            for consulta in lista_consultas:
+                print(consulta)
+        print('-'*20)
+    except:
+        print('Nenhuma consulta marcada! \n')
 
 
 
 def menu_consultas():
     while True:
-        print('''1 - Marcar nova consulta
-2 - Listar consultas
-3 - Sair
-        ''')
+        print('  1 - Marcar nova consulta \n  2 - Listar consultas \n  3 - Sair ')
+
         opcao = int(input('Selecione uma opção: \n'))
         if opcao == 1:
             try:
@@ -67,6 +68,6 @@ def menu_consultas():
             listar_consultas()
         elif opcao == 3:
             from menu_principal import menu_principal
-            menu_principal.menu_principal()
+            menu_principal()
         else:
             print("Opção inválida!")
