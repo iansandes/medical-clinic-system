@@ -26,7 +26,7 @@ def marcar_consulta():
     nome_medico = input('Escolha seu medico: ')
     dados['médico'] = nome_medico
 
-    dados['data'] = input('Qual data? ')  # Aqui não importar a data ou hora nesse sistema
+    dados['data'] = input('Qual data? ')
     dados['hora'] = input('Qual hora? ')
 
     return dados
