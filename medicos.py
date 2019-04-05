@@ -56,7 +56,7 @@ def remover_medico():
     try:
         with open('dados_medicos.json') as dados_medicos:
             lista_medicos = json.load(dados_medicos)
-            cpf = input('Qual o CPF do médico que você deseja remover?')
+            cpf = int(input('Qual o CPF do médico que você deseja remover?'))
             for medico in lista_medicos:
                 if medico['cpf'] == cpf:
                     lista_medicos.remove(medico)

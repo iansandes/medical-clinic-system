@@ -1,5 +1,5 @@
 import folha_pagamento as fp
-
+import estatisticas as es
 
 def menu_administracao():
     while True:
@@ -9,9 +9,13 @@ def menu_administracao():
         opcao = int(input('Selecione uma opção: '))
         if opcao == 1:
             folha_individual()
-        elif opcao == 2:
-            listar_pacientes()
         elif opcao == 3:
+            try:
+                es.grafico()
+            except:
+                print('Não existem dados de consulta!')
+                menu_administracao()
+        elif opcao == 4:
             from menu_principal import menu_principal
             menu_principal()
         else:
