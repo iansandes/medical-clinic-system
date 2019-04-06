@@ -88,12 +88,13 @@ def remover_consulta():
                                 print('Consulta removida com sucesso!\n')
                     else:
                         print('Consulta não encontrada!\n')
-                        menu_consultas()
+
                 else:
                     print('Consulta não encontrada!\n')
-                    menu_consultas()
+
     except:
         print('Nenhum paciente informado!\n')
+    finally:
         menu_consultas()
 
 
