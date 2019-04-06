@@ -2,6 +2,11 @@ import json
 
 
 def coletar_informacoes():
+    """
+
+    Recebe as informações do médico que são informadas pelo
+    usuário do sistema.
+    """
     nome = input('Nome: ')
     email = input('Email:')
     telefone = input('Telefone: ')
@@ -15,9 +20,9 @@ def coletar_informacoes():
     cidade = input('Cidade: ')
     uf = input('UF: ')
     planoDeSaude = input('Plano de saúde: ')
-    salario = input('Salario Bruto: ')
+    salario = float(input('Salario Bruto: '))
 
-    dados = dict(name=nome, email=email, phone=telefone, crm=crm,
+    dados = dict(name=nome, email=email.lower(), phone=telefone, crm=crm,
                  rg=rg, cpf=cpf, specialization=especializacao,
                  address=endereco, number=numero, hood=bairro,
                  city=cidade, state=uf, plan=planoDeSaude, salary=salario)
@@ -25,6 +30,12 @@ def coletar_informacoes():
 
 
 def cadastrar_medico():
+    """
+
+    Carrega o arquivo de médicos, caso ele exista, e adiciona as informações
+    coletadas pela função coletar_informacoes(). Caso não exista o arquivo de
+    médicos, um novo arquivo é aberto pra ser feito o cadastro dos médicos.
+    """
     try:
         with open('dados_medicos.json') as medicos:
             antigos_medicos = json.load(medicos)
@@ -40,12 +51,18 @@ def cadastrar_medico():
 
 
 def listar_medicos():
+    """
+
+    Carrega o arquivo de médicos e imprime o nome de cada médico cadas-
+    trado. Caso não exista o arquivo, é informado que nenhum médico está cadastrado.
+    Se o arquivo existir e estiver vazio, irá impimir a lista de médicos vazia.
+    """
     try:
         with open('dados_medicos.json', ) as dados_medicos:
             lista_medicos = json.load(dados_medicos)
-            print('Médicos     Especialização\n')
+
             for medico in lista_medicos:
-                print('{}       {}'.format(medico['name'], medico['specialization']))
+                print("Médico: {} | Especialização: {}".format(medico['name'], medico['specialization']))
         print('-' * 20)
     except:
         print("Nenhum médico cadastrado!")
@@ -53,6 +70,14 @@ def listar_medicos():
 
 
 def remover_medico():
+    """
+
+    Carrega o arquivo de médicos e pede para o usuário informar o número do
+    CPF do médico que deseja remover. Caso o número do CPF informado esteja cadastrado
+    no arquivo de médicos, esse médico será removido, e uma nova lista de médicos atualiza-
+    da irá sobrescrever a lista desatualizada. Caso o médico não seja encontrado ou nenhum CPF
+    seja informado, será exibido na tela.
+    """
     try:
         with open('dados_medicos.json') as dados_medicos:
             lista_medicos = json.load(dados_medicos)

@@ -1,7 +1,13 @@
 import json
-
+import administracao as adm
 
 def selecionar_medico():
+    """
+
+    Carrega a lista de médicos e pede o CPF do médico que o usuário
+    deseja ver a folha de pagamento. Se o médico for encontrado, serão retor-
+    nados os dados dele. Caso não seja, será informado a tela.
+    """
     try:
         with open('dados_medicos.json', ) as dados_medicos:
             lista_medicos = json.load(dados_medicos)
@@ -13,10 +19,11 @@ def selecionar_medico():
 
     except:
         print('Médico não encontrado!')
-        selecionar_medico()
+        adm.menu_administracao()
 
 
 def calculo_inss(salario_bruto):
+    """ Faz o cálculo do INSS a partir do salário bruto."""
     if salario_bruto < 1693.73:
         inss = salario_bruto * 8 / 100
     elif salario_bruto >= 1693.73 and salario_bruto < 2822.91:
@@ -29,6 +36,7 @@ def calculo_inss(salario_bruto):
 
 
 def calculo_irrf(salario_bruto):
+    """ Faz o cálculo do IRRF a partir do salário bruto."""
     salario = salario_bruto - calculo_inss(salario_bruto)
     if salario >= 1903.99 and salario < 2826.66:
         irrf = (salario - 142.82) * 7.5 / 100
@@ -44,6 +52,7 @@ def calculo_irrf(salario_bruto):
 
 
 def folha(salario_bruto):
+    """ Imprime a folha. """
     print("Salario Bruto")
     print(salario_bruto)
     print("Descontos")

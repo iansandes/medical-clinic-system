@@ -4,18 +4,18 @@ import estatisticas as es
 def menu_administracao():
     while True:
         print("\n1 - Folha de pagamento individual\n"
-              "2 - Despesas totais com pessoal\n"
-              "3 - Estatísticas de consultas\n")
+              "2 - Estatísticas de consultas\n"
+              "3 - Sair\n")
         opcao = int(input('Selecione uma opção: '))
         if opcao == 1:
             folha_individual()
-        elif opcao == 3:
+        elif opcao == 2:
             try:
                 es.grafico()
             except:
                 print('Não existem dados de consulta!')
                 menu_administracao()
-        elif opcao == 4:
+        elif opcao == 3:
             from menu_principal import menu_principal
             menu_principal()
         else:
@@ -23,6 +23,7 @@ def menu_administracao():
 
 
 def folha_individual():
+    """ Imprime a folha de pagamento do médico selecionado. """
     medico = fp.selecionar_medico()
     salario_bruto = int(medico['salary'])
     print("FOLHA DE PAGAMENTO\n"

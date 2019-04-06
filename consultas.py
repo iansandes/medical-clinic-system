@@ -2,6 +2,13 @@ import json
 
 
 def marcar_consulta():
+    """
+
+    Carrega os arquivos de pacientes e médicos. O usuário informa o nome do pa-
+    ciente e é verificado se o nome dele está cadastrado. Logo após é exibida a lista
+    de médicos cadastrados e sua especialização para ser feita a seleção do médico.
+    Além disso, são pedidos, dia, mês e hora para serem armazenados nos dados de consulta.
+    """
     dados = {}
     nome_paciente = input('Informe seu nome: ')
     with open('dados_pacientes.json') as dados_pacientes:
@@ -34,6 +41,11 @@ def marcar_consulta():
 
 
 def listar_consultas():
+    """
+
+    Carrega o arquivo de consultas e imprime as informações das consultas
+    cadastradas.
+    """
     try:
         with open('dados_consultas.json') as listas_consultas:
             lista_consultas = json.load(listas_consultas)
@@ -52,6 +64,14 @@ def listar_consultas():
 
 
 def remover_consulta():
+    """
+
+    Carrega o arquivo de consultas e pede para o usuário informar o nome do paciente, mês
+    e dia da consulta que deseja remover. Caso a consulta  esteja cadastrada no arquivo de
+    consultas, essa consulta será removida, e uma nova lista de consultas atualiza-
+    da irá sobrescrever a lista desatualizada. Caso a consulta não seja encontradaou
+    nenhum paciente seja informado, será exibido na tela.
+    """
     nome_paciente = input('Informe o nome do paciente: ')
     dia_consulta = input('Informe o dia da consulta [dd]: ')
     mes_consulta = input('Informe o mês da consulta [mm]: ')
@@ -59,12 +79,16 @@ def remover_consulta():
         with open('dados_consultas.json') as dados_consultas:
             lista_consultas = json.load(dados_consultas)
             for paciente in lista_consultas:
-                if paciente['name'] == nome_paciente and paciente['dia'] == dia_consulta and paciente['mes'] == mes_consulta:
-                        lista_consultas.remove(paciente)
-                        with open('dados_consultas.json', mode='w') as dados_consultas:
-                            consultas = json.dumps(lista_consultas)
-                            dados_consultas.write(consultas)
-                            print('Consulta removida com sucesso!\n')
+                if paciente['name'] == nome_paciente and paciente['dia'] == dia_consulta:
+                    if mes_consulta == paciente['mes']:
+                            lista_consultas.remove(paciente)
+                            with open('dados_consultas.json', mode='w') as dados_consultas:
+                                consultas = json.dumps(lista_consultas)
+                                dados_consultas.write(consultas)
+                                print('Consulta removida com sucesso!\n')
+                    else:
+                        print('Consulta não encontrada!\n')
+                        menu_consultas()
                 else:
                     print('Consulta não encontrada!\n')
                     menu_consultas()
