@@ -40,6 +40,24 @@ def marcar_consulta():
     return dados
 
 
+def cadastrar_consulta():
+    try:
+        with open('dados_consultas.json') as consultas:
+            antigos_consultas = json.load(consultas)
+        with open('dados_consultas.json', mode='w') as dados_consultas:
+            antigos_consultas.append(marcar_consulta())
+            novos_consultas = json.dumps(antigos_consultas)
+            dados_consultas.write(novos_consultas)
+
+    except:
+        with open('dados_consultas.json', mode='w') as dados_consultas:
+            novas_consultas = [marcar_consulta()]
+            consultas = json.dumps(novas_consultas)
+            dados_consultas.write(consultas)
+    finally:
+        print('\nConsulta marcada com sucesso!')
+
+
 def listar_consultas():
     """
 
@@ -85,40 +103,29 @@ def remover_consulta():
                             with open('dados_consultas.json', mode='w') as dados_consultas:
                                 consultas = json.dumps(lista_consultas)
                                 dados_consultas.write(consultas)
-                                print('Consulta removida com sucesso!\n')
+                                print('\nConsulta removida com sucesso!\n')
                     else:
-                        print('Consulta não encontrada!\n')
+                        print('\nConsulta não encontrada!\n')
 
                 else:
-                    print('Consulta não encontrada!\n')
+                    print('\nConsulta não encontrada!\n')
 
     except:
-        print('Nenhum paciente informado!\n')
+        print('\nNenhum paciente informado!\n')
     finally:
         menu_consultas()
 
 
 def menu_consultas():
     while True:
-        print('  1 - Marcar nova consulta \n  2 - Listar consultas \n  3 - Remover Consulta \n  4 - Sair ')
+        print("\n1 - Marcar nova consulta" 
+              "\n2 - Listar consultas"
+              "\n3 - Remover Consulta" 
+              "\n  4 - Sair ")
+
         opcao = int(input('Selecione uma opção: '))
         if opcao == 1:
-            try:
-                with open('dados_consultas.json') as consultas:
-                    antigos_consultas = json.load(consultas)
-                with open('dados_consultas.json', mode='w') as dados_consultas:
-                    antigos_consultas.append(marcar_consulta())
-                    novos_consultas = json.dumps(antigos_consultas)
-                    dados_consultas.write(novos_consultas)
-                    print('Consulta marcada com sucesso!')
-
-            except:
-                with open('dados_consultas.json', mode='w') as dados_consultas:
-                    novas_consultas = [marcar_consulta()]
-                    consultas = json.dumps(novas_consultas)
-                    dados_consultas.write(consultas)
-                    print('Consulta marcada com sucesso!')
-
+            cadastrar_consulta()
         elif opcao == 2:
             listar_consultas()
         elif opcao == 3:

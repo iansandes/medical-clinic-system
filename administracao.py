@@ -13,7 +13,7 @@ def menu_administracao():
             try:
                 es.grafico()
             except:
-                print('Não existem dados de consulta!')
+                print('\nNão existe dados de consulta!')
                 menu_administracao()
         elif opcao == 3:
             from menu_principal import menu_principal

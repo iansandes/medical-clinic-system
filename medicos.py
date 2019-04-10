@@ -48,6 +48,8 @@ def cadastrar_medico():
             novos_medicos = [coletar_informacoes()]
             medicos = json.dumps(novos_medicos)
             dados_medicos.write(medicos)
+    finally:
+        print('\nMédico cadastrado com sucesso!')
 
 
 def listar_medicos():
@@ -65,7 +67,7 @@ def listar_medicos():
                 print("Médico: {} | Especialização: {}".format(medico['name'], medico['specialization']))
         print('-' * 20)
     except:
-        print("Nenhum médico cadastrado!")
+        print("\nNenhum médico cadastrado!")
         menu_medicos()
 
 
@@ -93,17 +95,16 @@ def remover_medico():
                     print('Médico não encontrado!\n')
                     menu_medicos()
     except:
-        print('Nenhum CPF informado')
+        print('\nNenhum CPF encontrado')
         menu_medicos()
 
 
 def menu_medicos():
     while True:
-        print('''1 - Cadastrar novo médico
-2 - Listar médicos
-3 - Remover médicos
-4 - Sair
-        ''')
+        print("\n1 - Cadastrar novo médico\n"
+              "2 - Listar médicos\n"
+              "3 - Remover médico\n"
+              "4 - Sair")
         opcao = int(input('Selecione uma opção: '))
         if opcao == 1:
             cadastrar_medico()
@@ -115,4 +116,4 @@ def menu_medicos():
             from menu_principal import menu_principal
             menu_principal()
         else:
-            print("Opção inválida!")
+            print("\nOpção inválida!")

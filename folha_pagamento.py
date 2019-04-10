@@ -18,7 +18,7 @@ def selecionar_medico():
                     return medico_selec
 
     except:
-        print('Médico não encontrado!')
+        print('\nMédico não encontrado!')
         adm.menu_administracao()
 
 

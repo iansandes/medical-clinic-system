@@ -46,7 +46,8 @@ def cadastrar_paciente():
             novos_pacientes = [coletar_informacoes()]
             pacientes = json.dumps(novos_pacientes)
             dados_pacientes.write(pacientes)
-
+    finally:
+        print("\nPaciente cadastrado com sucesso!")
 
 def listar_pacientes():
     """
@@ -64,7 +65,7 @@ def listar_pacientes():
                 print(paciente['name'])
         print('-' * 20)
     except:
-        print('Nenhum paciente encontrado!')
+        print('\nNenhum paciente encontrado!')
         menu_pacientes()
 
 
